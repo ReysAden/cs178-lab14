@@ -30,14 +30,16 @@ def execute_query(query, args=()):
 # ---------------------------------------------------------------------------
 
 rows = execute_query("""
-    SELECT ArtistId, Artist.Name, Track.Name, UnitPrice
+    SELECT ArtistId, Artist.Name, Track.Name, UnitPrice, Milliseconds
     FROM Artist
     JOIN Album USING (ArtistID)
     JOIN Track USING (AlbumID)
+    JOIN MediaType USING (MediaTypeID)
+                     
     LIMIT 10
 """)
 
 for row in rows:
-    print(row[0], row[1], row[2], row[3])
+    print(row[0], row[1], row[2], row[3], row[4])
 
 # TODO: Exercise 1 — modify the query above to also return the Milliseconds column
