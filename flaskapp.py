@@ -59,6 +59,19 @@ def index():
 
 # TODO: Section 2 — add your /viewdb route here
 
+@app.route("/viewdb")
+def viewdb():
+    rows = execute_query("""
+        SELECT ArtistId, Artist.Name, Track.Name, UnitPrice, Milliseconds
+        FROM Artist
+        JOIN Album USING (ArtistID)
+        JOIN Track USING (AlbumID)
+        JOIN MediaType USING (MediaTypeID)
+                         
+        LIMIT 10
+    """)
+    return display_html(rows)
+
 # TODO: Section 2 — add your /artistquery/<artist_id> route here
 
 # TODO: Section 3 — add your /pricequerytextbox GET and POST routes here
